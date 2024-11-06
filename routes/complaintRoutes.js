@@ -1,9 +1,7 @@
 const express = require('express');
+const { createComplaint } = require('../controllers/complaintController');
 const router = express.Router();
-const complaintController = require('../controllers/complaintController');
-const authMiddleware = require('../middlewares/authMiddleware');
 
-// View specific complaint (students can check their own complaints)
-router.get('/:id', authMiddleware.verifyToken, complaintController.getComplaint);
+router.post('/', createComplaint);
 
 module.exports = router;

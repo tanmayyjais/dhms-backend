@@ -11,7 +11,7 @@ const studentSchema = new mongoose.Schema({
     block: String,
   },
   idnumber: { type: Number, required: true },
-  enrollmentnumber: { type: Number, required: true },
+  enrollmentnumber: { type: String, required: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Student', studentSchema);

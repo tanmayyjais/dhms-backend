@@ -1,8 +1,12 @@
 const Complaint = require('../models/Complaint');
 
-// Get Complaint (Student View)
-exports.getComplaint = async (req, res) => {
-  const complaint = await Complaint.findOne({ _id: req.params.id, studentId: req.user.id });
-  if (!complaint) return res.status(404).json({ message: 'Complaint not found' });
-  res.json(complaint);
+exports.createComplaint = async (req, res) => {
+  try {
+    const complaint = new Complaint(req.body);
+    await complaint.save();
+    res.status(201).json({ message: 'Complaint submitted successfully' });
+  } catch (error) {
+    console.error('Error in complaint submission:', error);
+    res.status(500).json({ message: 'Failed to submit complaint' });
+  }
 };
